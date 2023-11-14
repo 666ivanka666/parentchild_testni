@@ -1,59 +1,63 @@
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    Post,
-    Put,
-  } from '@nestjs/common';
-  import { ParentService } from './parent.service';
-  import { ParentDto } from './dto';
-  import { IdDto, NameDto } from 'src/common/decorators';
-  import { Parent } from './type';
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ParentService } from './parent.service';
+import { ParentDto } from './dto';
+import { IdDto, NameDto } from 'src/common/decorators';
+import { Parent } from './type';
 
-  @Controller('parent')
+@Controller('parent')
 export class ParentController {
-    constructor( private readonly parentService: ParentService) {}
+  constructor(private readonly parentService: ParentService) {}
 
-    @Post()
-    addParent(@Body() body: ParentDto): {id:string} {
-        const generatedId = this.parentService.insertParent(
-            body.firstName,
-            body.lastName,
-            body.childId,
-        );
-        return {id: generatedId};
-    }
+  @Post()
+  addParent(@Body() body: ParentDto): { id: string } {
+    const generatedId = this.parentService.insertParent(
+      body.firstName,
+      body.lastName,
+      body.childId,
+    );
+    return { id: generatedId };
+  }
 
-    @Get()
-    getAllParents(): Parent [] {
-        return this.parentService.getParent();
-    }
+  @Get()
+  getAllParents(): Parent[] {
+    return this.parentService.getParent();
+  }
 
-    @Get(':id')
-    getParentById(@Param() params: IdDto): Parent {
-      const { id } = params;
-      return this.parentService.getSingleParent(id);
-    }
+  @Get(':id')
+  getParentById(@Param() params: IdDto): Parent {
+    const { id } = params;
+    return this.parentService.getSingleParent(id);
+  }
 
-    @Get('name/: neme')
-    getParentByName( @Param() params: NameDto): Parent [] {
-        const {name} = params;
-        return this.parentService.getParent().filter((parent) => parent.firstName === name);
-    }
-    
-    @Put(':id')
-    updateParent(@Param() params: IdDto, @Body() body: ParentDto): Parent{
-        const {id} = params;
-        return this.parentService.updateParent(id, body.firstName, body.lastName, body.childId);
-    }
+  @Get('name/: name')
+  getParentByName(@Param() params: NameDto): Parent[] {
+    const { name } = params;
+    return this.parentService
+      .getParent()
+      .filter((parent) => parent.firstName === name);
+  }
 
-    @Delete(':id')
-    deleteParentById(@Param() params: IdDto): { message: string } {
-      return this.parentService.deleteParent(params.id);
-    }
+  @Put(':id')
+  updateParent(@Param() params: IdDto, @Body() body: ParentDto): Parent {
+    const { id } = params;
+    return this.parentService.updateParent(
+      id,
+      body.firstName,
+      body.lastName,
+      body.childId,
+    );
+  }
 
+  @Delete(':id')
+  deleteParentById(@Param() params: IdDto): { message: string } {
+    return this.parentService.deleteParent(params.id);
+  }
 }
-
-  
