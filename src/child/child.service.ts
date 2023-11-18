@@ -4,16 +4,16 @@ import { Child } from './type';
 
 @Injectable()
 export class ChildService {
-  private child: Child[] = [];
+  private chidren: Child[] = [];
 
   insertChild(firstName: string, lastName: string, parentId: string): string {
     const childId = uuidv4();
-    this.child.push(new Child(childId, firstName, lastName, parentId));
+    this.chidren.push(new Child(childId, firstName, lastName, parentId));
     return childId;
   }
 
   getChild(): Child[] {
-    return this.child;
+    return this.chidren;
   }
 
   getSingleChild(childId: string): Child {
@@ -42,15 +42,15 @@ export class ChildService {
 
   deleteChild(childId: string) {
     const [child, index] = this.findChild(childId);
-    this.child.splice(index, 1);
+    this.chidren.splice(index, 1);
     return { message: ' Usjesno obrisano' };
   }
 
   findChild(id: string): [Child, number] {
-    const childIndex = this.child.findIndex((child) => child.id === id);
+    const childIndex = this.chidren.findIndex((parent) => parent.id === id);
     if (childIndex === -1) {
-      throw new NotFoundException(`Child with ID ${id} not found`);
+      throw new NotFoundException(`Parent with ID ${id} not found`);
     }
-    return [this.child[this.childIndex], this.childIndex];
+    return [this.chidren[childIndex], childIndex];
   }
 }

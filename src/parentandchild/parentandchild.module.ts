@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ParentChildService } from './parentandchild.service';
 import { ParentChildController } from './parentandchild.controller';
-import { ChildModule } from 'src/child/child.module';
-import { ParentModule } from 'src/parent/parent.module';
+import { ChildService } from 'src/child/child.service';
+import { ParentService } from 'src/parent/parent.service';
 
 @Module({
-  imports: [ChildModule, ParentModule],
+  imports: [ChildService, ParentService],
   providers: [ParentChildService],
   controllers: [ParentChildController],
 })

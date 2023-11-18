@@ -12,8 +12,8 @@ export class ParentChildService {
   ) {}
 
   updateParentChild(parentId: string, childId: string): ParentChild {
-    this.parentchildService.findParentChild(childId);
-    this.parentchildService.findParentChild(parentId);
+    this.childService.findChild(childId);
+    this.parentService.findParent(parentId);
 
     const [parentchild] = this.findParentChild(childId);
 

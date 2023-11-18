@@ -14,7 +14,7 @@ export class ParentChildController {
     @Body() body: ParentChildDto,
   ): ParentChild {
     const { childId } = params;
-    return this.parentchildService.updateChild(
+    return this.parentchildService.updateParentChild(
       childId,
       body.parentId,
       body.childId,
@@ -27,7 +27,7 @@ export class ParentChildController {
     @Body() body: ParentChildDto,
   ): ParentChild {
     const { parentId } = params;
-    return this.parentchildService.updateParent(
+    return this.parentchildService.updateParentChild(
       parentId,
       body.parentId,
       body.childId,
