@@ -37,14 +37,6 @@ export class ParentController {
     return this.parentService.getSingleParent(id);
   }
 
-  @Get('name/: name')
-  getParentByName(@Param() params: NameDto): Parent[] {
-    const { name } = params;
-    return this.parentService
-      .getParent()
-      .filter((parent) => parent.firstName === name);
-  }
-
   @Put(':id')
   updateParent(@Param() params: IdDto, @Body() body: ParentDto): Parent {
     const { id } = params;

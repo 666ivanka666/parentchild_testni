@@ -49,7 +49,7 @@ export class ChildService {
   findChild(id: string): [Child, number] {
     const childIndex = this.chidren.findIndex((parent) => parent.id === id);
     if (childIndex === -1) {
-      throw new NotFoundException(`Parent with ID ${id} not found`);
+      throw new NotFoundException(`Child with ID ${id} not found`);
     }
     return [this.chidren[childIndex], childIndex];
   }

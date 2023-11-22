@@ -8,29 +8,61 @@ import { ParentChild } from './type';
 export class ParentChildController {
   constructor(private readonly parentchildService: ParentChildService) {}
 
-  @Put('child/:childId')
-  updateChild(
-    @Param() params: IdDto,
-    @Body() body: ParentChildDto,
-  ): ParentChild {
-    const { childId } = params;
-    return this.parentchildService.updateParentChild(
-      childId,
-      body.parentId,
-      body.childId,
-    );
-  }
+//   @Put('child/:childId')
+//   updateChild(
+//     @Param() params: IdDto,
+//     @Body() body: ParentChildDto,
+//   ): ParentChild {
+//     const { childId } = params;
+//     return this.parentchildService.updateParentChild(
+//       childId,
+//       body.parentId,
+//       body.childId,
+//     );
+//   }
 
-  @Put('parent/:parentId')
-  updateParent(
-    @Param() params: IdDto,
-    @Body() body: ParentChildDto,
-  ): ParentChild {
-    const { parentId } = params;
-    return this.parentchildService.updateParentChild(
-      parentId,
-      body.parentId,
-      body.childId,
-    );
-  }
+//   @Put('parent/:parentId')
+//   updateParent(
+//     @Param() params: IdDto,
+//     @Body() body: ParentChildDto,
+//   ): ParentChild {
+//     const { parentId } = params;
+//     return this.parentchildService.updateParentChild(
+//       parentId,
+//       body.parentId,
+//       body.childId,
+//     );
+//   }
+// }
+
+
+
+
+
+// novi pokusaj
+
+
+@Put('child/:childId')
+updateChild(
+  @Param('childId') childId: number,
+  @Body() body: ParentChildDto,
+): ParentChild {
+  return this.parentchildService.updateParentChild(
+    childId,
+    body.parentId,
+    body.childId,
+  );
+}
+
+@Put('parent/:parentId')
+updateParent(
+  @Param('parentId') parentId: number,
+  @Body() body: ParentChildDto,
+): ParentChild {
+  return this.parentchildService.updateParentChild(
+    parentId,
+    body.parentId,
+    body.childId,
+  );
+}
 }

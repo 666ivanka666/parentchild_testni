@@ -26,7 +26,6 @@ export class ParentService {
     lastName: string,
     childId: string,
   ): Parent {
-    this.childService.findChild(childId);
 
     const [parent] = this.findParent(parentId);
     if (firstName) {
