@@ -1,42 +1,24 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ChildService } from 'src/child/child.service';
 import { ParentService } from 'src/parent/parent.service';
+import { ParentChild } from './type';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ParentChildService {
-  private parentchild: { id: string; parentId: string; childId: string }[] = [];
+  private parentchild: ParentChild[] = [];
 
   constructor(
     private readonly childService: ChildService,
     private readonly parentService: ParentService,
   ) {}
 
-  updateParentChild(parentId: string, childId: string): { id: string; parentId: string; childId: string } {
-    const parent = this.parentService.findParent(parentId);
-    const child = this.childService.findChild(childId);
+  createParentChild(parentId: string, childId: string) {
+    this.parentService.findParent(parentId);
+    this.childService.findChild(childId);
 
-    const [parentchild, index] = this.findParentChild(parentId);
+    const id = uuidv4();
 
-    if (childId) {
-      parentchild.childId = childId;
-    }
-    if (parentId) {
-      parentchild.parentId = parentId;
-    }
-
-    return parentchild;
-  }
-
-  findParentChild(id: string): [{ id: string; parentId: string; childId: string }, number] {
-    const parentchildIndex = this.parentchild.findIndex(
-      (parentchild) => parentchild.id === id,
-    );
-    if (parentchildIndex === -1) {
-      throw new NotAcceptableException(
-        `Parent or Child with ID ${id} not found`,
-      );
-    }
-
-    return [this.parentchild[parentchildIndex], parentchildIndex];
+    this.parentchild.push(new ParentChild(id, parentId, childId));
   }
 }

@@ -20,12 +20,7 @@ export class ParentService {
     return parent;
   }
 
-  updateParent(
-    parentId: string,
-    firstName: string,
-    lastName: string,
-  ): Parent {
-
+  updateParent(parentId: string, firstName: string, lastName: string): Parent {
     const [parent] = this.findParent(parentId);
     if (firstName) {
       parent.firstName = firstName;
