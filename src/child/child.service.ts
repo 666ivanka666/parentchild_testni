@@ -6,9 +6,9 @@ import { Child } from './type';
 export class ChildService {
   private chidren: Child[] = [];
 
-  insertChild(firstName: string, lastName: string, parentId: string): string {
+  insertChild(firstName: string, lastName: string): string {
     const childId = uuidv4();
-    this.chidren.push(new Child(childId, firstName, lastName, parentId));
+    this.chidren.push(new Child(childId, firstName, lastName));
     return childId;
   }
 
@@ -25,7 +25,6 @@ export class ChildService {
     childId: string,
     firstName: string,
     lastName: string,
-    parentId: string,
   ): Child {
     const [child] = this.findChild(childId);
     if (firstName) {
@@ -34,14 +33,12 @@ export class ChildService {
     if (lastName) {
       child.lastName = lastName;
     }
-    if (parentId) {
-      child.parentId = parentId;
-    }
+
     return child;
   }
 
   deleteChild(childId: string) {
-    const [child, index] = this.findChild(childId);
+    const [, index] = this.findChild(childId);
     this.chidren.splice(index, 1);
     return { message: ' Usjesno obrisano' };
   }

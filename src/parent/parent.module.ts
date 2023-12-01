@@ -5,6 +5,6 @@ import { ParentController } from './parent.controller';
 @Module({
   providers: [ParentService],
   controllers: [ParentController],
-  exports: [ParentService],
+  exports: [ParentModule],
 })
 export class ParentModule {}

@@ -8,9 +8,4 @@ export class ChildDto {
   @IsString()
   @IsNotEmpty()
   lastName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @IsUUID()
-  parentId: string;
 }

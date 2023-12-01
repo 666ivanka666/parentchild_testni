@@ -21,14 +21,14 @@ export class ChildController {
     const generatedId = this.childService.insertChild(
       body.firstName,
       body.lastName,
-      body.parentId,
+   
     );
     return { id: generatedId };
   }
 
   @Get()
   getAllChildren(): Child[] {
-    return this.childService.getChild().filter((child) => child.active);
+    return this.childService.getChild();
   }
 
   @Get(':id')
@@ -40,7 +40,7 @@ export class ChildController {
   @Get('name/: name')
   getChildByName(@Param() params: NameDto): Child[] {
     const { name } = params;
-    return this.childService.getChild().filter((child) => child.name === name);
+    return this.childService.getChild().filter((child) => child.firstName === name);
   }
 
   @Put(':id')
@@ -50,7 +50,6 @@ export class ChildController {
       id,
       body.firstName,
       body.lastName,
-      body.parentId,
     );
   }
 

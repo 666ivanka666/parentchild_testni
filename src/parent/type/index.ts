@@ -3,6 +3,5 @@ export class Parent {
     public id: string,
     public firstName: string,
     public lastName: string,
-    public childId: string,
   ) {}
 }

@@ -21,7 +21,7 @@ export class ParentController {
     const generatedId = this.parentService.insertParent(
       body.firstName,
       body.lastName,
-      body.childId,
+      
     );
     return { id: generatedId };
   }
@@ -44,7 +44,7 @@ export class ParentController {
       id,
       body.firstName,
       body.lastName,
-      body.childId,
+      
     );
   }
 
